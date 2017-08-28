@@ -1,0 +1,29 @@
+<ion-content padding>
+    
+  <ion-list>
+    <ion-list-header>Configura tu cuenta</ion-list-header>
+  </ion-list>
+
+  <br><br><br><br><br>
+
+  <div class="img_logo_user">
+    <img [src]="img_logo_user" class="img_user">
+  </div>
+
+  <ion-list>
+    <ion-item class="btns_change_img_user">
+      <button ion-button  (click)="image()" icon-left>
+          <ion-icon ios="ios-image" md="md-image"></ion-icon> GALERIA
+          </button>  
+        <button ion-button  (click)="btnOpenCamera()" icon-left>
+          <ion-icon ios="ios-camera" md="md-camera">  </ion-icon> CAMARA        
+        </button>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block (click)="save()" icon-left>
+    <ion-icon ios="ios-bookmark" md="md-bookmark" ></ion-icon>
+    OMITIR
+  </button>
+
+</ion-content>

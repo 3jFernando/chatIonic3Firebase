@@ -1,0 +1,168 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title (click)="goProfileContact()">
+      <img [src]="photoURL" style="width: 35px; height: 35px; border-radius: 35px;">
+      <b style="padding-left: 4px; padding-top: 6px;">{{ username }}</b>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only color="light" (click)="goInvitesJoin()">
+        PLAN
+      </button> 
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar color="primary">
+    <ion-segment [(ngModel)]="chat">
+      <ion-segment-button value="messages" (click)="btnGoMessagesSegment()">
+        <b style="color:#fff">MENSAJES</b>
+      </ion-segment-button>
+      <ion-segment-button value="emogis">
+        <b style="color:#fff">EMOGIS</b>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding class="background-body">
+
+  <div [ngSwitch]="chat">
+    <div *ngSwitchCase="'messages'" padding>
+
+      <div *ngFor="let mess of messages | async">
+        <div *ngIf="mess.senderID === contactId" style="display: -webkit-box !important;">
+          <img [src]="photoURL" style="width: 25px; height: 25px; border-radius: 25px; margin-top: 11px;">    
+          <div class="divClassContact" (press)="optionsMessage(mess.$key)" *ngIf="mess.tipe === 'text'">
+            <div class="messageSenderID">      
+              <p class="textMessageContact">{{mess.text}}</p>
+              <p class="dateMessageContact"><i>{{ mess.createdAt | date:'MMM d, yy h:mm a'}}</i></p>
+            </div>
+          </div>
+          <div class="divClassContact" (press)="optionsMessage(mess.$key, mess.text)" *ngIf="mess.tipe === 'image'">
+            <div class="messageSenderID">      
+              <img src="{{imageLoadPhotoMessage}}" [src]="mess.text" style="width: 300px; height: 300px;" imageViewer />
+              <p class="dateMessageContact"><i>{{ mess.createdAt | date:'MMM d, yy h:mm a'}}</i></p>
+            </div>
+          </div> 
+          <div class="divClassContact" (press)="optionsMessage(mess.$key, mess.text)" *ngIf="mess.tipe === 'emogi'">
+            <div class="messageSenderID">      
+              <img src="{{imageLoadPhotoMessage}}" [src]="mess.text" style="width: 92px; height: 92px;"/>
+              <p class="dateMessageContact"><i>{{ mess.createdAt | date:'MMM d, yy h:mm a'}}</i></p>
+            </div>
+          </div>  
+        </div>  
+        <div *ngIf="mess.senderID === uid">
+          <div class="divClassUser" (press)="optionsMessage(mess.$key, mess.text)" >
+            <div class="messageUid" *ngIf="mess.tipe === 'text'">
+              <p class="textMessageUser">{{mess.text}}</p>
+              <p class="dateMessageUser">
+                <i>{{ mess.createdAt | date:'MMM d, yy h:mm a'}}</i>
+              </p>
+            </div>
+            <div *ngIf="mess.tipe === 'image'" class="messageUid" >
+              <img src="{{imageLoadPhotoMessage}}" [src]="mess.text" style="width: 300px; height: 300px;" imageViewer />
+              <p class="dateMessageUser"><i>{{ mess.createdAt | date:'MMM d, yy h:mm a'}}</i></p>
+            </div>
+            <div *ngIf="mess.tipe === 'emogi'" class="messageUid" >
+              <img src="{{imageLoadPhotoMessage}}" [src]="mess.text" style="width: 92px; height: 92px;"/>
+              <p class="dateMessageUser"><i>{{ mess.createdAt | date:'MMM d, yy h:mm a'}}</i></p>
+            </div>
+          </div>  
+        </div> 
+      </div>
+
+      <div class="divClassUser" *ngIf="sendingLoadingMessaje">
+        <div class="messageUid">
+          <img [src]="sendingLoadingMessaje" style="width: 300px; height: 300px;"/>
+        </div>
+      </div> 
+
+    </div>
+    <div *ngSwitchCase="'emogis'" style="background: #fff;">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let emogi of listEmogisfeliz">
+            <div>
+              <img [src]="emogi.src" style="width: 50px; height: 50px;" (click)="clickEmogi(emogi.src)" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let emogi of listEmogiscoqueto">
+            <div>
+              <img [src]="emogi.src" style="width: 50px; height: 50px;" (click)="clickEmogi(emogi.src)" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let emogi of listEmogissorprendido">
+            <div>
+              <img [src]="emogi.src" style="width: 50px; height: 50px;" (click)="clickEmogi(emogi.src)" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
+      
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let emogi of listEmogistriste">
+            <div>
+              <img [src]="emogi.src" style="width: 50px; height: 50px;" (click)="clickEmogi(emogi.src)" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let emogi of listEmogisenojado">
+            <div>
+              <img [src]="emogi.src" style="width: 50px; height: 50px;" (click)="clickEmogi(emogi.src)" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
+      
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let emogi of listEmogisvipolaridad">
+            <div>
+              <img [src]="emogi.src" style="width: 50px; height: 50px;" (click)="clickEmogi(emogi.src)" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
+
+    </div>
+  </div>  
+
+  
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-buttons start>
+      <button ion-button large icon-end color="primary" (click)="addFileImage()" style="font-size: 20px; padding: 0px;">
+        <ion-icon ios="ios-attach" md="md-attach"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-item>
+      <ion-input class="inputTextMessages" [(ngModel)]="txt_message" placeholder="Escribir mensaje!"></ion-input>
+    </ion-item>
+    <ion-buttons end>
+      <button ion-button color= large icon-end (click)="sendMessage()" color="primary" style="font-size: 20px;padding: 0px; margin-right: 4px;">
+        <ion-icon ios="ios-paper-plane" md="md-paper-plane"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

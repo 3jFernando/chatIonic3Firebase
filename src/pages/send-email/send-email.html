@@ -1,0 +1,67 @@
+<!--
+  Generated template for the SendEmailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>ENVIAR CORREO</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-list>
+
+	  <ion-item>
+	    <ion-label stacked>DE</ion-label>
+	    <ion-input type="email" [(ngModel)]="emailUser">{{emailUser}}</ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-label stacked>PARA</ion-label>
+	    <ion-input type="email" [(ngModel)]="emailContact">{{emailContact}}</ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-label stacked>ASUNTO</ion-label>
+	    <ion-input type="text" [(ngModel)]="txt_subject"></ion-input>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-label stacked>MENSAJE</ion-label>
+	    <ion-textarea [(ngModel)]="txt_message" rows="6"></ion-textarea>
+	  </ion-item>
+
+	</ion-list>
+
+	<ion-card style="text-align: center;">
+
+	  <ion-card-header>
+	    <p>ABJUNTA UNA IMAGEN AL CORREO</p>
+	    <button ion-button outline color="primary" (click)="image()">
+        <ion-icon ios="ios-image" md="md-image"></ion-icon>
+      </button>  
+      <button ion-button ion-button outline color="primary" (click)="btnOpenCamera()">
+       	<ion-icon ios="ios-camera" md="md-camera">  </ion-icon>
+      </button>
+	  </ion-card-header>
+	  <ion-card-content>
+	    
+	  </ion-card-content>
+
+	</ion-card>
+
+	<div style="text-align: center;">
+		<button ion-button outline color="primary" (click)="btnSendEmail()">ENVIAR</button>
+		<button ion-button outline color="danger" (click)="btnCancelEmail()">CANCELAR</button>
+	</div>
+
+	<br>
+
+
+</ion-content>

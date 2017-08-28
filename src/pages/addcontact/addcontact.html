@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Enviar solicitudes de amistad</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list no-lines>
+    <ion-item *ngFor="let userAdd of users | async">
+        <ion-avatar item-start>
+          <img [src]="userAdd.photoURL" imageViewer>
+        </ion-avatar>
+        <h4 style="padding-top: 1px; color:#13859a;"> {{ userAdd.username }} </h4>
+        <ion-icon ios="ios-person-add" md="md-person-add" (click)="addUser(userAdd)" color="primary" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

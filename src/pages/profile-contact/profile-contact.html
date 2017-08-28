@@ -1,0 +1,100 @@
+<ion-header>
+ 
+  <ion-navbar color="primary">
+    <ion-title>{{ username }}</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar color="primary">
+    <ion-segment [(ngModel)]="profileContact">
+      <ion-segment-button value="profile" >
+        <b style="color:#fff">PERFIL</b>
+      </ion-segment-button>
+      <ion-segment-button value="publications">
+        <b style="color:#fff">PUBLICACIONES</b>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+	<div [ngSwitch]="profileContact">
+	    <div *ngSwitchCase="'profile'" padding>	    	
+	    	<div class="img_logo_user">
+			    <img [src]="photoURL" class="img_user" imageViewer>
+			  </div>
+
+			  <ion-item>
+			    <ion-icon ios="ios-contacts" md="md-contacts" color="primary" item-left></ion-icon>
+			    <label style="color: #13859a;">CONTACTOS</label>
+			    <br>
+			    <p>
+			      Tiene: {{countContacts}} contactos
+			    </p>
+			  </ion-item>	
+
+			  <ion-item (click)="btnSeePublications()">
+			    <ion-icon ios="ios-folder-open" md="md-folder-open" color="primary" item-left></ion-icon>
+			    <label style="color: #13859a;">PUBLICACIONES</label>
+			    <br>
+			    <p>
+			      Ha realizado: {{countPublications}} publicaciones
+			    </p>
+			    <ion-icon ios="ios-redo" md="md-redo" color="primary" item-right ></ion-icon>    
+			  </ion-item>	
+
+			  <ion-item (click)="btnSendEmail()"> 
+			    <ion-icon ios="ios-mail" md="md-mail" color="primary" item-left></ion-icon>
+			    <label style="color: #13859a;">CORREO ELECTRONICO</label>
+			    <br>
+			    <p>
+			      {{email}}
+			    </p>
+			    <ion-icon ios="ios-paper-plane" md="md-paper-plane" color="primary" item-right></ion-icon>    
+			  </ion-item>	
+
+			  <ion-item>
+			    <ion-icon ios="ios-body" md="md-body" color="primary" item-left></ion-icon>
+			    <label style="color: #13859a;">UBICACION DEL CONTACTO</label>
+			    <br>
+			    <p>
+			      Lat: {{ location_latitude }} <br>
+			      Lgt: {{ location_longitude }}
+			    </p>
+			    <ion-icon ios="ios-globe" md="md-globe" color="primary" item-right></ion-icon>    
+			  </ion-item>
+
+	    </div>
+	    <div *ngSwitchCase="'publications'">
+	    	
+	    	<ion-card *ngFor="let publication of publications | async">
+			  	<ion-item>
+			    <ion-avatar item-start>
+			      <img [src]="photoURL" imageViewer />
+				    </ion-avatar>
+				    <h2 style="color: #13859a;">{{username}}</h2>
+				    <p><i>{{publication.createdAt | date:'MMM d, yy h:mm a'}}</i></p>
+				  </ion-item>
+
+				  <img *ngIf="publication.nameUrl" [src]="publication.nameUrl" imageViewer>
+
+				  <ion-card-content>
+				    <p *ngIf="publication.content">
+				    	{{publication.content}}
+				    </p>
+
+				  <div style="text-align: right;">
+				  	<button ion-button outline icon-left (click)="btnLikePublication(publication)">
+							<ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon> 
+						</button>	
+				  </div> 
+
+				  </ion-card-content>
+
+				</ion-card>
+
+	    </div>
+	</div>
+
+</ion-content>

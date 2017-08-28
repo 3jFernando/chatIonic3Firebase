@@ -1,0 +1,78 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>NOTIFICACIONES</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only color="light" (click)="goToHelp()">
+        <ion-icon ios="ios-information" md="md-information"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+   <ion-list>
+    <ion-list-header>
+      <p style="text-align: center;">
+        SOLICITUDES DE AMISTAD
+      </p>
+    </ion-list-header>
+  </ion-list>
+
+  <div *ngFor="let invited of inviteds | async" >
+    <div *ngFor="let user of users | async">
+
+      <div *ngIf="invited.contactId == user.$key">
+        <ion-card>
+          <ion-card-content class="card_content">
+            <ion-card-title class="card_title_user">
+              <img [src]="user.photoURL" style="width: 40px; height: 40px; border-radius: 40px;" imageViewer/>
+              <label class="label_card_user" (click)="invitedClick(invited.contactId, user.$key, user.username)">
+                {{ user.username }}
+              </label>
+              <i class="dateLastMessage" (click)="invitedClick(invited.contactId, user.$key, user.username)">
+                {{ invited.createAt | date:'MMM d, yy h:mm a'}}
+              </i>
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+  <ion-list>
+    <ion-list-header>
+      <p style="text-align: center;">
+        INVITACIONES
+      </p>
+    </ion-list-header>
+  </ion-list>
+
+  <div *ngFor="let join of invitedsJoins" >
+    <div *ngFor="let user of invitedsJoinsUsers">
+    
+      <div *ngIf="join.$key == user.$key">
+        <ion-card>
+          <ion-card-content class="card_content" (click)="goSeeInvitesJoin(join, user)">
+            <ion-card-title class="card_title_user">
+              <img [src]="user.photoURL" style="width: 40px; height: 40px; border-radius: 40px;" imageViewer/>
+              <label class="label_card_user">
+                {{ user.username }}
+              </label>
+              <ion-badge item-end>VER</ion-badge>
+              <ion-icon ios="ios-clipboard" md="md-clipboard" item-end color="primary"></ion-icon>
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

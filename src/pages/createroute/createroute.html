@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Crea rutas con amigos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  
+  <div *ngFor="let user of users | async" >
+    <div *ngFor="let contact of contacts | async">
+      <div *ngIf="contact.contactId == user.$key" (click)="createRoute(user.position.latitude, user.position.longitude);">
+        <ion-card>
+          <ion-card-content class="card_content">
+            <ion-card-title class="card_title_user">
+              <img [src]="user.photoURL" class="img_user_card" imageViewer/>
+              <label class="label_card_user">{{ user.username }}</label>
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <ion-list>
+    <ion-list-header>
+      <p style="text-align: center;">
+        Aqui, puedes crear rutas con tus amigos,<br>
+        estas rutas pueden ser coduciendo carro, <br>
+        en visicleta (selecciona esta opcion <br>solo si en tu ciudad hay ciclovia)...
+      </p>
+    </ion-list-header>
+  </ion-list>
+
+</ion-content>

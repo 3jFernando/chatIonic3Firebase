@@ -1,0 +1,76 @@
+<ion-header>
+ 
+  <ion-navbar color="primary">
+    <ion-title>Mis Publicaciones</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="goProfile()">
+        <ion-avatar item-right>
+          <img [src]="photoURL" style="width: 35px; height: 35px; border-radius: 35px;">
+        </ion-avatar>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+	<ion-card>
+	  <ion-card-content>
+
+	  	<div style="text-align: right;">
+	  		<button ion-button outline color="primary">
+					<ion-icon ios="ios-globe" md="md-globe" (click)="btn_openPosition()"></ion-icon>
+				</button>
+		  	<button ion-button outline color="primary">
+					<ion-icon ios="ios-camera" md="md-camera" (click)="btn_openCamera()"></ion-icon>
+				</button>
+				<button ion-button outline color="primary">
+					<ion-icon ios="ios-image" md="md-image" (click)="btn_openGallery()"></ion-icon>
+				</button>	
+
+				<img *ngIf="imgPublications" [src]="imgPublications" imageViewer>
+
+		  </div>
+
+	    <ion-item>
+		    <ion-label stacked color="primary">Comparte algo! ;)</ion-label>
+    		<ion-textarea color="primary" [(ngModel)]="txt_publications" rows="4"></ion-textarea>
+		  </ion-item>
+
+		  <div style="text-align: right;">
+		  	<button ion-button outline (click)="goCancelContent()" color="primary" icon-left>
+					<ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon> Cancelar
+				</button>	
+				<button ion-button outline (click)="goPublicContent()" color="primary" icon-left>
+					<ion-icon ios="ios-pricetag" md="md-pricetag"></ion-icon> Publicar
+				</button>
+		  </div>
+	  </ion-card-content>
+	</ion-card>
+
+  <ion-card *ngFor="let publication of publications | async">
+  	<ion-item>
+    <ion-avatar item-start>
+      <img [src]="photoURL" imageViewer>
+	    </ion-avatar>
+	    <h2 style="color: #13859a;">{{username}}</h2>
+	    <p><i>{{publication.createdAt | date:'MMM d, yy h:mm a'}}</i></p>
+	  </ion-item>
+
+	  <img *ngIf="publication.nameUrl" [src]="publication.nameUrl">
+
+	  <ion-card-content>
+	    <p *ngIf="publication.content">{{publication.content}}</p>
+
+	  <div style="text-align: right;">
+	  	<button ion-button outline color="danger" (click)="btnDeletePublication(publication)" icon-left>
+					<ion-icon ios="ios-trash" md="md-trash"></ion-icon> ELIMINAR
+			</button>  	
+	  </div> 
+
+	  </ion-card-content>
+
+	</ion-card>
+
+

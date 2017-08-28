@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Crea un plan!</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only color="light" (click)="goSeeInvitesJoin()">
+        VER PLANES
+      </button> 
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+	<ion-list>
+
+	  <ion-item *ngFor="let invite of invitesPlans" (click)="goToInvitesJoin(invite)">
+	    <ion-icon name={{invite.icon}} item-start color="primary"></ion-icon>
+	    <i>{{ invite.name }}</i>
+	  </ion-item>
+
+	</ion-list>
+
+</ion-content>

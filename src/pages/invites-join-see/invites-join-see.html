@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Planes con {{user.username}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+	<ion-list>
+    <ion-list-header>
+      <p style="text-align: center;">
+        SOLICITUDES DE {{user.username}}
+      </p>
+    </ion-list-header>
+  </ion-list>
+
+	<ion-card *ngFor="let invited of invitesjoin | async">
+  	<ion-item>
+    	<ion-avatar item-start>
+      	<ion-icon name={{invited.icon}} item-start color="primary"></ion-icon>
+	  	</ion-avatar>
+	    <h2>{{ invited.name }}</h2>
+	    <i class="dateLastMessage">{{ invited.date | date:'MMM d, yy h:mm a'}}</i>
+	    	<ion-icon ios="ios-sad" md="md-sad" item-end color="danger" *ngIf="invited.state === 0" (click)="btnGoUpdateStateInvitedJoin(invited)"></ion-icon>
+	    	<ion-badge item-end *ngIf="invited.state === 0" color="danger" (click)="btnGoUpdateStateInvitedJoin(invited)">ACEPTARLO</ion-badge>
+	    	<ion-icon ios="ios-happy" md="md-happy" item-end color="primary" *ngIf="invited.state === 1" (click)="btnGoUpdateStateInvitedJoin(invited)"></ion-icon>
+	    	<ion-badge item-end *ngIf="invited.state === 1" color="primary" (click)="btnGoUpdateStateInvitedJoin(invited)">CANCELARLO</ion-badge>
+	  </ion-item>
+	</ion-card>
+
+	<ion-list>
+    <ion-list-header>
+      <p style="text-align: center;">
+        TUS SOLICITUDES PARA {{user.username}}
+      </p>
+    </ion-list-header>
+  </ion-list>
+
+  <ion-card *ngFor="let invited of invitesjoinContat | async">
+  	<ion-item>
+    	<ion-avatar item-start>
+      	<ion-icon name={{invited.icon}} item-start color="primary"></ion-icon>
+	  	</ion-avatar>
+	    <h2>{{ invited.name }}</h2>
+	    <i class="dateLastMessage">{{ invited.date | date:'MMM d, yy h:mm a'}}</i>
+	    <ion-badge item-end *ngIf="invited.state === 0" color="danger">CANCELADA</ion-badge>
+	    <ion-badge item-end *ngIf="invited.state === 1" color="primary">ACEPTADA</ion-badge>
+	    <ion-icon ios="ios-trash" md="md-trash" item-end color="danger" (click)="goToDeleteInvitedJoin(invited.$key)"></ion-icon>
+	  </ion-item>
+	</ion-card>
+
+</ion-content>

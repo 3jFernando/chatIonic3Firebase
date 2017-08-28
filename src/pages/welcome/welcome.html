@@ -1,0 +1,26 @@
+<ion-content class="background">
+
+	<br><br><br><br><br>
+
+	<ion-card>
+		<ion-card-header>
+			BIENVENIDO A PeopleGO
+		</ion-card-header>
+		<ion-card-content>
+			<ion-list no-line>
+				<ion-item>
+          <ion-input type="email" placeholder="Ingrese su correo electronico" [(ngModel)]="txt_email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Ingrese su clave de usuario" [(ngModel)]="txt_password"></ion-input>
+        </ion-item>
+				<a>No tengo una cuenta? <b (click)="logout()">Obtener una cuenta!</b></a>
+				<button ion-button block outline color="light" (click)="loginSimple()">INICIAR SESION</button>
+				<p>O</p>
+				<button ion-button block color="danger">
+					<ion-icon name="logo-google"></ion-icon> INICIAR SESION CON GOOGLE
+				</button>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

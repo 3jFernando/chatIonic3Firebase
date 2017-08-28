@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only color="light" (click)="seeInviteds()">
+        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+        <ion-badge item-end>{{countInviteds}}</ion-badge>
+      </button>
+      <button ion-button icon-only color="light">
+        <ion-icon ios="ios-contacts" md="md-contacts"></ion-icon>
+        <ion-badge item-end>{{countContacts}}</ion-badge>
+      </button> 
+    </ion-buttons>
+    <ion-title>{{username}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngFor="let user of users | async" >
+    <div *ngFor="let contact of contacts | async">
+      <div *ngIf="contact.contactId == user.$key">
+        <ion-card>
+          <ion-card-content class="card_content">
+            <ion-card-title class="card_title_user">
+              <img [src]="user.photoURL" class="img_user_card" imageViewer/>
+              <label (click)="sendMessage(contact)" class="label_card_user">
+                {{ user.username }}<br>
+                <i class="lastMessage" *ngIf="contact.tipe === 'text'">
+                  <i *ngIf="contact.owner === 'you'">
+                    <ion-icon ios="ios-return-left" md="md-return-left"></ion-icon> 
+                  </i>
+                  <b *ngIf="contact.owner === 'i'">
+                    TU:  
+                  </b> <i style="padding-left: 2px;">{{ contact.lastMessage }}</i>
+                </i>
+                <i class="lastMessage" *ngIf="contact.tipe === 'emogi'">
+                  <img [src]="contact.lastMessage" style="width: 24px; height: 24px;" />
+                </i>
+                <i class="lastMessage" *ngIf="contact.tipe === 'image'" style="display: -webkit-box;">
+                  <img [src]="contact.lastMessage" style="width: 14px; height: 14px; border-radius: 14px;" /> <i style="padding-left: 2px;">Fotografia</i>
+                </i>
+              </label>
+              <i class="dateLastMessage">
+                  {{ contact.dateLastMessage | date:'MMM d, yy h:mm a'}}
+              </i>
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+  
+  <ion-fab right bottom>
+    <button ion-fab color="primary">
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-fab-list side="top">      
+      <button ion-fab (click)="addContact()" color="primary"><ion-icon ios="ios-person-add" md="md-person-add"></ion-icon></button>      
+      <button ion-fab (click)="seeInviteds()" color="primary"><ion-icon ios="ios-notifications" md="md-notifications"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>CREAR CUENTA EN PeopleGO</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <br><br>
+  <ion-list>
+    <ion-list-header>Crea tu cuenta</ion-list-header>
+  </ion-list>
+
+  <ion-list>
+    
+    <ion-item>
+      <ion-label color="primary" stacked>Correo electronico</ion-label>
+      <ion-input type="email" [(ngModel)]="txt_email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Nombre completo</ion-label>
+      <ion-input type="text" [(ngModel)]="txt_username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Clave de usuario</ion-label>
+      <ion-input type="password" [(ngModel)]="txt_password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block (click)="create()" icon-left>
+    <ion-icon ios="ios-bookmark" md="md-bookmark" ></ion-icon>CONTINUAR
+  </button>
+
+</ion-content>

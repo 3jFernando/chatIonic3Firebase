@@ -1,0 +1,94 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{nametitle}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div class="img_logo_user">
+    <img [src]="img_logo_user" class="img_user" imageViewer>
+  </div>
+
+  <ion-list>
+    <ion-item class="btns_change_img_user">
+      <button ion-button outline icon-left color="primary"  (click)="image()">
+          <ion-icon ios="ios-image" md="md-image"></ion-icon> GALERIA
+          </button>  
+        <button ion-button ion-button outline icon-left color="primary" (click)="btnOpenCamera()">
+          <ion-icon ios="ios-camera" md="md-camera">  </ion-icon> CAMARA        
+        </button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>NOMBRE COMPLETO</ion-label>
+      <ion-input type="text" placeholder="NOMBRE COMPLETO" [(ngModel)]="txt_username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>CORREO ELECTRONICO</ion-label>
+      <ion-input type="email" placeholder="NOMBRE COMPLETO" [(ngModel)]="txt_email"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div style="text-align: center;">
+    <button ion-button ion-button block outline icon-left (click)="save()">
+      <ion-icon ios="ios-bookmark" md="md-bookmark" ></ion-icon> 
+      GUARDAR 
+    </button>  
+  </div>  
+
+    <ion-item>
+      <ion-icon ios="ios-contacts" md="md-contacts" color="primary" item-left></ion-icon>
+      <label style="color: #13859a;">CONTACTOS</label>
+      <br>
+      <p>
+        Tienes: {{countContacts}} contactos
+      </p>
+    </ion-item> 
+
+    <ion-item>
+      <ion-icon ios="ios-folder-open" md="md-folder-open" color="primary" item-left></ion-icon>
+      <label style="color: #13859a;">PUBLICACIONES</label>
+      <br>
+      <p>
+        Has realizado: {{countPublications}} publicaciones
+      </p>
+    </ion-item> 
+
+    <ion-item>
+      <ion-icon ios="ios-mail" md="md-mail" color="primary" item-left></ion-icon>
+      <label style="color: #13859a;">CORREO ELECTRONICO</label>
+      <br>
+      <p>
+        {{txt_email}}
+      </p>
+    </ion-item> 
+
+    <ion-item>
+      <ion-icon ios="ios-body" md="md-body" color="primary" item-left></ion-icon>
+      <label style="color: #13859a;">MI UBICACION</label>
+      <br>
+      <p>
+        Lat: {{ location_latitude }} <br>
+        Lgt: {{ location_longitude }}
+      </p>
+      <ion-icon ios="ios-create" md="md-create" color="primary" item-right (click)="updatePosition()"></ion-icon>
+    </ion-item>
+
+  <br><br>
+
+  <ion-item (click)="close_section()">
+    <ion-icon  color="danger" ios="ios-log-out" md="md-log-out" item-left></ion-icon>
+    <label style="color: #ccc;">SALIR DE LA APP</label>
+  </ion-item>
+
+</ion-content>
